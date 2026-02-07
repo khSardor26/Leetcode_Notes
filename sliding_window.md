@@ -1,50 +1,39 @@
 
-# Sliding Window 🪟🔥
+# 📦 Spring Boot Multipart File Upload (Sample)
 
-Sliding Window is a **core algorithmic technique** used to optimize problems involving  
-**subarrays / substrings** from **O(n²)** ➜ **O(n)** ⚡
-
----
-
-## When to Use 🤔
-
-Keywords that strongly suggest Sliding Window:
-- 🧩 subarray / substring
-- 🔁 continuous
-- 📏 longest / shortest
-- 📈 max / min
-- 🎯 at most / at least
+A minimal and clean **Java Spring Boot** project that demonstrates how to upload files using **multipart/form-data** ✅  
+Perfect as a reference repo for interviews, backend practice, or plugging into bigger projects.
 
 ---
 
-## Core Idea 🧠
+## ✨ Features
 
-Maintain a window `[left → right]`:
-- ➕ expand → `right++`
-- ➖ shrink → `left++`
-- 📝 update result while iterating
+- 📤 Upload single file via `multipart/form-data`
+- 📦 Upload with metadata (DTO + file)
+- ✅ Validations (size / empty file / content type)
+- 🧾 Clear API responses + error handling
+- 🧪 Ready for Postman / cURL testing
+- 🧱 Clean code structure (controller → service → storage)
 
 ---
 
-## Time & Space Complexity
-- Time O(N)
-- Space O(1)
+## 🧰 Tech Stack
 
+- ☕ Java [17/21]
+- 🌱 Spring Boot [version]
+- 🔧 Maven / Gradle
+- 📄 Lombok (optional)
+- 🧪 JUnit (optional)
 
+---
 
-## Types 🪟
+## 🗂️ Project Structure
 
-### 1️⃣ Fixed Size Window
-Window size = `k`
-
-```java
-int sum = 0;
-for (int i = 0; i < k; i++) sum += nums[i];
-
-int max = sum;
-for (int i = k; i < nums.length; i++) {
-    sum += nums[i];
-    sum -= nums[i - k];
-    max = Math.max(max, sum);
-}
+```txt
+src/main/java/...
+├── controller/     # REST endpoints
+├── service/        # business logic
+├── storage/        # file saving logic (local/cloud)
+├── dto/            # request/response models
+└── exception/      # custom errors + handler
 
