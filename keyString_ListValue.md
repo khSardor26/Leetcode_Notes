@@ -1,39 +1,58 @@
 
-# 📦 Spring Boot Multipart File Upload (Sample)
+# LeetCode 49 — Group Anagrams
 
-A minimal and clean **Java Spring Boot** project that demonstrates how to upload files using **multipart/form-data** ✅  
-Perfect as a reference repo for interviews, backend practice, or plugging into bigger projects.
+Today I solved an interesting problem on **LeetCode** — **Problem 49: Group Anagrams**.
 
----
+The core idea of this problem is to **group strings that are anagrams** of each other and return them as a list of lists.
 
-## ✨ Features
+I used an elegant approach where:
 
-- 📤 Upload single file via `multipart/form-data`
-- 📦 Upload with metadata (DTO + file)
-- ✅ Validations (size / empty file / content type)
-- 🧾 Clear API responses + error handling
-- 🧪 Ready for Postman / cURL testing
-- 🧱 Clean code structure (controller → service → storage)
+- The **key** is the **sorted version of the string**
+- The **value** is a **list of all strings that match that key**
+
+This works because all anagrams become identical after sorting their characters.
 
 ---
 
-## 🧰 Tech Stack
+## 🔑 Key Insight
 
-- ☕ Java [17/21]
-- 🌱 Spring Boot [version]
-- 🔧 Maven / Gradle
-- 📄 Lombok (optional)
-- 🧪 JUnit (optional)
+If two words are anagrams, their sorted versions are the same.
+
+Example:
+"eat" → "aet"  
+"tea" → "aet"  
+"tan" → "ant"
+
+
+So `"aet"` and `"ant"` can be used as keys in a map.
 
 ---
 
-## 🗂️ Project Structure
+Time & Space Complexity
 
-```txt
-src/main/java/...
-├── controller/     # REST endpoints
-├── service/        # business logic
-├── storage/        # file saving logic (local/cloud)
-├── dto/            # request/response models
-└── exception/      # custom errors + handler
+-   **Time Complexity:** `O(n · k log k)`  
+    `n` = number of strings, `k` = average length of each string
+    
+-   **Space Complexity:** `O(n · k)`
+
+
+## 💻 Java Implementation
+
+```java
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String word : strs) {
+            char[] chars = word.toCharArray();
+            Arrays.sort(chars);
+            String sortedWord = new String(chars);
+
+            map.computeIfAbsent(sortedWord, k -> new ArrayList<>()).add(word);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+}
+
 
