@@ -2,6 +2,8 @@
 
 ## Code
 
+
+where candies = nums array
 ```java
 int max = Arrays.stream(candies).max().getAsInt();
 
